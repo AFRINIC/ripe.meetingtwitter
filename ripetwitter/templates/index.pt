@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head> 
+    <meta charset="utf-8" /> 
+    <title>Conference Twitter Wall</title> 
+    <link rel="stylesheet" href="${request.static_path('ripetwitter:static/screen.css')}" type="text/css" media="screen" charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <script type="text/javascript" src="${request.static_path('ripetwitter:static/jquery.min.js')}"></script>
+
+</head> 
+
+<body> 
+    <h1 tal:content="title" ></h1>
+    <div id="container" tal:condition="not:tweets">
+        <div id="tweet" class="clearfix"><div class="tweet">No current tweets</div></div> 
+    </div>
+    <div id="container" tal:condition="tweets">
+        <tal:c tal:condition="python: type == 'single'">
+            <div id="tweet"> 
+
+            </div>
+        </tal:c>
+        <div tal:attributes="class string:tweets ${type}" tal:repeat="tweet tweets">
+            <div class="user">
+                <img tal:attributes="src tweet.user.profile_image_url_https" />
+                <tal:block tal:content="tweet.user.name" />
+            </div>
+            <div class="tweet">
+                <tal:block tal:replace="structure tweet.text" />
+            </div>
+            <br />
+        </div>
+        <div class="clear"></div>
+    </div>
+
+<script tal:condition="tweets">
+
+    var tweets = null;
+    var container = null;
+
+    function new_tweets() {
+        var this_url = document.URL;
+        $.ajax({
+            type: "GET",
+            url: this_url,
+            success: function(html) {
+                tweets = $(html).find('.tweets');
+            }
+        });
+    }
+
+
+    $(document).ready(function() {
+        $('#container').css('height', $(window).height());
+        if ($('.tweets').length > 1) {
+            $('#tweet').empty();
+            var count = 0;
+            tweets = $('.tweets');
+            container = $('#container');
+            function changeQuote() {
+
+                <tal:c tal:condition="python: type == 'single'">
+                    $('.tweets').hide();
+                    $('#tweet').fadeIn().delay(10000).fadeOut(function() {
+                        changeQuote();
+                    }).html($(tweets[count++]).show())
+                </tal:c>
+
+                <tal:c tal:condition="python: type == 'full'">
+                    setInterval(function(){
+                        $('#container').empty();
+                        new_tweets();
+                        var current_tweets = $('.tweets');
+                        for (var i=0; i < tweets.length; i++) {
+                            $('#container').append($(tweets[i])).fadeIn(5000);
+                        }
+                    }, 10000);
+                </tal:c>
+
+                if (count == tweets.length) {
+                    count = 0;
+                    new_tweets();
+                }
+            }
+            changeQuote();
+        }
+
+    });
+</script>
+
+</body> 
+</html> 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
