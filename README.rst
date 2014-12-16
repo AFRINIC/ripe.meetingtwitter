@@ -36,7 +36,7 @@ For a development (reload) application:
 For a production application using supervisord:
 
 	make production
-    bin/supervisord
+    	bin/supervisord
 
 The development environment is used to test the Twitterwall.
 
@@ -62,7 +62,7 @@ In development mode:
 In production, supervisord is installed. Thefore you can use that to start up the instances:
  
 	bin/supervisorctl
-    start pyramids
+    	start pyramids
 
 If you don't want to use supervisord, you can run the bin/pserve [development.ini/production.ini] &
 
@@ -101,3 +101,8 @@ If you have a problem with the buildout, or want to run it again, run:
 	make clean
 
 Then run the required buildout command.
+
+License
+------------------------
+
+This library is distributed under the BSD License. See: https://raw.github.com/RIPE-NCC/rpki-commons/master/LICENSE.txt
