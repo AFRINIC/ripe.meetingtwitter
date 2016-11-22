@@ -1,0 +1,7 @@
+lib
+lib64
+include
+ripetwitter.log
+ripe_twitter.egg-info
+ripetwitter/__init__.pyc
+ripetwitter/views.pyc
