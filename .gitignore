@@ -1,7 +1,11 @@
 lib
 lib64
 include
+bin
+eggs
+develop-eggs
 ripetwitter.log
 ripe_twitter.egg-info
 ripetwitter/__init__.pyc
 ripetwitter/views.pyc
+.installed.cfg
