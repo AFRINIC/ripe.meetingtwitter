@@ -20,15 +20,15 @@ pull:
 clean:
 	rm -f bin/* .installed.cfg 
 
-bin/buildout: bin/python2.6
+bin/buildout: bin/python2
 	@wget http://downloads.buildout.org/1/bootstrap.py
-	@bin/python2.6 bootstrap.py
+	@bin/python2 bootstrap.py
 	@bin/buildout
 	@bin/python setup.py develop
 	@rm bootstrap.*
 
-bin/python2.6:
-	@virtualenv --clear -p python2.6 --no-site-packages .
+bin/python2:
+	@virtualenv --clear -p python2 --no-site-packages .
 
 dev-reload:
 	bin/pserve --reload development.ini
