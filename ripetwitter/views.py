@@ -9,8 +9,9 @@ token_secret = ''
 consumer_key = ''
 consumer_secret = ''
 
-@view_config(route_name='home', renderer='templates/index.pt')
+search_type = ''
 
+@view_config(route_name='home', renderer='templates/index.pt')
 
 def index_view(request):
     tweets = []
