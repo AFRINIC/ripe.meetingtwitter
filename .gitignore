@@ -9,4 +9,6 @@ ripetwitter.log
 ripe_twitter.egg-info
 ripetwitter/__init__.pyc
 ripetwitter/views.pyc
+pip-selfcheck.json
+.Python
 .installed.cfg
